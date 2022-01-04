@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:hello_world/pages/TestPage1.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 void main() {
@@ -63,6 +64,12 @@ class _MyHomePageState extends State<MyHomePage> {
     });
   }
 
+  void handleMovePage1(context) {
+    Navigator.of(context).push(MaterialPageRoute(builder: (context) {
+      return const TestPage1();
+    }));
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -82,13 +89,14 @@ class _MyHomePageState extends State<MyHomePage> {
                 _type,
                 style: const TextStyle(fontSize: 20.0, color: Colors.amber, fontFamily: 'roboto')),
               IconButton(
-                icon: Icon(Icons.accessibility_sharp),
+                icon: const Icon(Icons.accessibility_sharp),
                 onPressed: () async {
                   String url = Uri.encodeFull('https://google.com');
                   if (await canLaunch(url)) {
                     await launch(url);
                   }
               }),
+              TextButton(onPressed: ()=>  handleMovePage1(context), child: const Text('ページ1に移動', style: TextStyle(fontSize: 20.0, fontFamily: 'roboto'),))
             ]
           )
         )
